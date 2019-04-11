@@ -15,15 +15,16 @@ imageFiles = ['.JPG', '.JPEG', '.TIF', '.PNG', '.RAW']
 pictures = os.path.join(".", "pictures")
 os.mkdir(pictures)
 
+# Create file to list all paths to images.
+f = open("pathDirs.txt", "w+")
+
 # Begin walking Directory
 for root, dirs, files, in os.walk(startDir):
     for name in files:
         for fileType in imageFiles:
             if name.endswith(fileType):
                 source = os.path.join(root, name)
+		f.write(source) # Write image path to the file
                 #shutil.copy(source, pictures) # I don't believe it needs to copy the files but to create a list of their locations.
                 print(source)
-
-    # I'm not sure what this loop is for? since we don't need to modify directories but will leave for now
-    for name in dirs:
-        print(os.path.join(root, name))
+f.close() # Close file
