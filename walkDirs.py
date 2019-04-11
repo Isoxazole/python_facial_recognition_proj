@@ -21,7 +21,7 @@ for root, dirs, files, in os.walk(startDir):
         for fileType in imageFiles:
             if name.endswith(fileType):
                 source = os.path.join(root, name)
-                shutil.copy(source, pictures)
+                #shutil.copy(source, pictures) # I don't believe it needs to copy the files but to create a list of their locations.
                 print(source)
 
     # I'm not sure what this loop is for? since we don't need to modify directories but will leave for now
