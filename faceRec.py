@@ -20,6 +20,6 @@ for file_loc in file_locs:
 	print(file_loc)
 	curr_test_img = work_dir + file_loc
 	unk_face = fr.load_image_file(curr_test_img)
-	unk_face_enc = fr.face_encodings(unk_face)
+	unk_face_enc = fr.face_encodings(unk_face)[0]
 	result = fr.compare_faces([known_face_enc], unk_face_enc)
 	print(result)
