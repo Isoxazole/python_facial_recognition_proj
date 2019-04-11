@@ -12,11 +12,11 @@ imageFiles = ['.JPG', '.JPEG', '.TIF', '.PNG', '.RAW']
 
 # Create pictures directory in the current directory of where program is running
 # NOTE* this will only run once, as of now it will not over write if there's a pictures directory
-pictures = os.path.join(".", "pictures")
-os.mkdir(pictures)
+#pictures = os.path.join(".", "pictures")
+#os.mkdir(pictures)
 
 # Create file to list all paths to images.
-f = open("pathDirs.txt", "w+")
+f = open("img_paths.txt", "w+")
 
 # Begin walking Directory
 for root, dirs, files, in os.walk(startDir):
@@ -24,6 +24,7 @@ for root, dirs, files, in os.walk(startDir):
         for fileType in imageFiles:
             if name.endswith(fileType):
                 source = os.path.join(root, name)
+		print(source)
 		f.write(source) # Write image path to the file
                 #shutil.copy(source, pictures) # I don't believe it needs to copy the files but to create a list of their locations.
                 print(source)

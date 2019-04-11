@@ -2,7 +2,7 @@
 import face_recognition as fr
 
 # Load file with image directories.
-with open("files.txt") as f:
+with open("img_paths.txt") as f:
 	file_locs = f.readlines()
 file_locs = [x.strip() for x in file_locs]
 
