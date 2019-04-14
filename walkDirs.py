@@ -1,11 +1,19 @@
 import os
+import sys
 
-# Choose the starting directory. This will choose the root directory
-startDir = os.path.abspath(os.sep)
+# Get the first argument from command line to be the starting directory
+try:
+    startDir = sys.argv[1]
+    if os.path.exists(startDir) != True:    # Check if the given path exists
+        startDir = os.path.abspath(os.sep)  # If given path DNE set to root directory
+        print("Given path doesn't exists")  
+except:
+    startDir = os.path.abspath(os.sep)      # If no argument is given default to root directory
+    
+print("Starting directory: " + startDir)
 
 # Create a list of acceptable image formats.
 imageFiles = ['.JPG', '.JPEG', '.TIF', '.PNG', '.RAW']
-
 
 # Create file to list all paths to images.
 f = open("img_paths.txt", "w+")
