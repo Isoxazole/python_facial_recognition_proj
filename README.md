@@ -9,3 +9,16 @@ This is meant to help photographers with large libraries of images to search for
 Frameworks required:
 	openface - recomend using Docker image (bamos/openface)
 	face_recognition
+
+SETUP:
+	Load OpenFace
+		Pull Docker image "bamos/openface"
+		OR
+		Follow instructions here
+			https://cmusatyalab.github.io/openface/setup/
+	Run image
+		docker run -it bamos/openface bash
+	Load dependencies
+		pip install face_recognition
+	Load Program
+		git clone https://github.com/rjfitzg/PythonFinalProj.git
