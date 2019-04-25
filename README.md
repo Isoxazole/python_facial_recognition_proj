@@ -22,3 +22,18 @@ SETUP:
 		pip install face_recognition
 	Load Program
 		git clone https://github.com/rjfitzg/PythonFinalProj.git
+
+Running the program:
+	1. Take an image of your face. Make sure it is only your face in the image. To maximize accuracy, you should make sure there is good lighting and is front facing. 
+
+	2. Move the image of your face to where the local project is. 
+		ie. '~/Path/To/PythonFinalProj/known/'
+
+	3. Rename the image of yourself to your name.
+		ie. 'Riley_Fitz.jpg'
+
+	4. Run the python project. 
+		python PythonFinalProj
+
+		NOTE: Running the code snippet above will search the entire hard drive from root or C:/. To only search a certain directory, run..
+		python PythonFinalProj ~/Path/To/Directory/

@@ -1,5 +1,0 @@
-This is a simple little text document to talk through some of our code.
-
-Regarding the walkDirs.py, it currently copies the images to a directory. I do not believe this is needed as we can make a simple little file to put the location of each image in, and then feed that to our code to do facial recogniztion.
-
-Need to decide how to make this somewhat user friendly. Command line interface?
