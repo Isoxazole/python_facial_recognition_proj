@@ -1,16 +1,7 @@
 import os
 import sys
 
-def walk_dirs():
-    # Get the first argument from command line to be the starting directory
-    try:
-        startDir = sys.argv[1]
-        if os.path.exists(startDir) != True:    # Check if the given path exists
-            startDir = os.path.abspath(os.sep)  # If given path DNE set to root directory
-            print("Given path doesn't exists")  
-    except:
-        startDir = os.path.abspath(os.sep)      # If no argument is given default to root directory
-        
+def walk_dirs(startDir):  
     print("Starting directory: " + startDir)
 
     # Create a list of acceptable image formats.
