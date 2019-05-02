@@ -18,7 +18,7 @@ def face_rec():
 	# Get full path to user known image
 	
 	while not (known_face_load):
-		known_face_loc = input("Please enter the full path of the known face to be found:\n")
+		known_face_loc = raw_input("Please enter the full path of the known face to be found:\n")
 		# Load known face to test off of. Working from lfw dataset.
 		try:
 			known_face = fr.load_image_file(known_face_loc)

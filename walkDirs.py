@@ -16,7 +16,7 @@ def walk_dirs(startDir):
             for fileType in imageFiles:
                 if name.endswith(fileType.lower()):
                     source = os.path.join(root, name)
-                    print(source)
+                    #print(source)
                     f.write(source + "\n") # Write image path to the file on separate lines
     f.close() # Close file
 
