@@ -6,6 +6,7 @@ def face_rec():
 	# Load variables
 	known_face_load = False
 	count = 0
+	num_faces = 5
 
 	# Load file with image directories.
 	with open("img_paths.txt") as f:
@@ -33,13 +34,14 @@ def face_rec():
 	for file_loc in file_locs:
 		try:
 			unk_face = fr.load_image_file(file_loc)
-			unk_face_enc = fr.face_encodings(unk_face)[0]
-			result = fr.compare_faces([known_face_enc], unk_face_enc)
+			result = []
+			for i in range(0,num_faces + 1): # Search for number of faces defined
+				unk_face_enc = fr.face_encodings(unk_face)[i]
+				result[i] = fr.compare_faces([known_face_enc], unk_face_enc)
 		except:
-			# No face was found in file.
-			# Or error loading file..
-			print('NO FACES WERE FOUND HERE')
-		if (result == [True]):
+			pass
+
+		if ([True] in result):
 			known_face_file.write(file_loc)
 			count += 1
 			print("MATCH: %s" % file_loc)
