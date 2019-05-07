@@ -1,30 +1,50 @@
-# PythonFinalProj
-A collection of files for Python final project
+Bulk Photo Face Recognition
+===
 
-Project is meant to be able to walk through the contents of an entire hard drive and make collections of viable images. After a collection of these images is cached, the images will be run through face_recognition to search for a desired face, a predetermined image to match.
-This could be difficult for users with very large librarys of photos on a weak computer as the frameworks need a good amount of power to be run. Should work for both GPU and CPU.
+Overview
+---
 
-This is meant to help photographers with large libraries of images to search for specified faces, using Openface/face_recognition as a backend.
+This project is meant to be able to gather a listing of images on a users computer, and given a known face, find images with similar faces.
+
+The scripts run through the contents of the hard drive, from either root or specified location and extract the full path of each image. 
+After this full path of images is found and written to a file, another script reads though files in.
+Each file is individually loaded to be compared against the known face image. 
+If the current image is a close enough match to the known image, its full path is saved to a file.
+The end result is a text file with the full path of any/all images with similar faces as the known image.
+
+This program was created with the idea that photographers with large, and potentially unorganized photosets, can still search for certain individuals.
+
+This program uses OpenFace and face_recognition as the frameworks behind them. 
+Both of these libraries work by analyzing the individual pixel values of a given image.
+As such, this can be **EXTREMELY** taxing computationally. 
+
+For large photo collections or collections with large files contained in it, it is recomended to use a GPU to improve performance.
+
+---
 
 Frameworks required:
-	openface - recomend using Docker image (bamos/openface)
+---
+	openface - recomend using Docker image (bamos/openface)  
 	face_recognition
 
 SETUP:
+---
 	Load OpenFace
 		Pull Docker image "bamos/openface"
+		`docker pull bamos/openface`
 		OR
 		Follow instructions here
 			https://cmusatyalab.github.io/openface/setup/
 	Run image
-		docker run -it bamos/openface bash
+		`docker run -it bamos/openface bash`
 	Load dependencies
-		pip install face_recognition
+		`pip install face_recognition`
 	Load Program
-		git clone https://github.com/rjfitzg/PythonFinalProj.git
+		`git clone https://github.com/rjfitzg/PythonFinalProj.git`
 
 Running the program:
-	1. Take an image of your face. Make sure it is only your face in the image. To maximize accuracy, you should make sure there is good lighting and is front facing. 
+---
+	1. Take an image of your face. Make sure it is only your face in the image. To maximize accuracy, you should make sure there is good lighting and the image is front facing. 
 
 	2. Move the image of your face to where the local project is. 
 		ie. '~/Path/To/PythonFinalProj/known/'
@@ -33,7 +53,10 @@ Running the program:
 		ie. 'Riley_Fitz.jpg'
 
 	4. Run the python project. 
-		python PythonFinalProj
+	`python PythonFinalProj`
 
-		NOTE: Running the code snippet above will search the entire hard drive from root or C:/. To only search a certain directory, run..
-		python PythonFinalProj ~/Path/To/Directory/
+Examples:
+```
+python face_find.py # Searches from root
+
+python face_find.py /path/to/directory # Searches given path if it exists
