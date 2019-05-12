@@ -7,6 +7,8 @@ def face_rec():
 	known_face_load = False
 	count = 0
 	num_faces = 5
+	result = []
+
 
 	# Load file with image directories.
 	with open("img_paths.txt") as f:
@@ -33,8 +35,8 @@ def face_rec():
 	# https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py
 	for file_loc in file_locs:
 		try:
-			unk_face = fr.load_image_file(file_loc)
 			result = []
+			unk_face = fr.load_image_file(file_loc)
 			for i in range(0,num_faces + 1): # Search for number of faces defined
 				unk_face_enc = fr.face_encodings(unk_face)[i]
 				result[i] = fr.compare_faces([known_face_enc], unk_face_enc)
@@ -49,4 +51,4 @@ def face_rec():
 	return known_face_file, count
 
 if __name__=="__main__":
-    face_rec()
+	face_rec()
