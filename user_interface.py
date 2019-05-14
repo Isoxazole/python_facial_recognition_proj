@@ -60,7 +60,7 @@ def submit():
 
         show_recognized_faces()
 
-        messagebox.showinfo("FaceFind Search Completed", f"There were %s recognized faces\n"
+        messagebox.showinfo("FaceFind Search Completed", "There were %s recognized faces\n"
                            "The full path of the images with the recognized face is here:\n %s" % (count, known_face_file))
 
         # print(directory_path)
