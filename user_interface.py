@@ -28,6 +28,15 @@ def submit():
         f" Please enter a valid path for your picture of choice")
     directory_path = os.path.abspath(entry1.get())
     picture_path = os.path.abspath(entry2.get())
+
+    walkDirs.walk_dirs(directory_path)
+
+    known_face_file, count = faceRec.face_rec()
+
+    messagebox.showinfo("FaceFind Search Completed", f"There were {count} recognized faces\n"
+                        f"The full path of the images with the recognized face is here: \n {known_face_file}")
+
+
     print(directory_path)
     print(picture_path)
 
