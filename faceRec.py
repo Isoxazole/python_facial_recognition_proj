@@ -49,7 +49,7 @@ def face_rec(picture_path=""):
 			pass
 
 		if ([True] in result):
-			known_face_file.write(file_loc)
+			known_face_file.write(file_loc + "\n")
 			count += 1
 			print("MATCH: %s" % file_loc)
 	known_face_file.close()
