@@ -6,8 +6,6 @@ def face_rec(picture_path=""):
 	# Load variables
 	known_face_load = False
 	count = 0
-	num_faces = 5
-	result = []
 
 
 	# Load file with image directories.
@@ -31,7 +29,7 @@ def face_rec(picture_path=""):
 		try:
 			known_face = fr.load_image_file(known_face_loc)
 			known_face_enc = fr.face_encodings(known_face)[0] 
-			known_face_load = True
+			known_face_load = True # Set variable confirm sucessful setting.
 		except:
 			print('There was an error loading the known face. \n Check the path and that the image has a face.\nTry again..')
 
@@ -39,19 +37,17 @@ def face_rec(picture_path=""):
 	# It needs to undergo a for loop for every known image we have.
 	# https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py
 	for file_loc in file_locs:
-		try:
-			result = []
-			unk_face = fr.load_image_file(file_loc)
-			for i in range(0,num_faces + 1): # Search for number of faces defined
-				unk_face_enc = fr.face_encodings(unk_face)[i]
-				result[i] = fr.compare_faces([known_face_enc], unk_face_enc)
-		except:
-			pass
-
-		if ([True] in result):
-			known_face_file.write(file_loc + "\n")
-			count += 1
-			print("MATCH: %s" % file_loc)
+		unk_img = fr.load_image_file(file_loc)
+		unk_img_enc = fr.face_encodings(unk_img)
+		for i in range(len(unk_img_enc)):
+			result = fr.compare_faces([known_face_enc], unk_img_enc[i]) 
+			# If there is a True result, no need to search image further.
+			if ([True] in result):
+				known_face_file.write(file_loc + "\n")
+				count += 1
+				print("MATCH: %s" % file_loc)
+				break
+	# Finished searching, close file.
 	known_face_file.close()
 	return known_face_file, count
 
