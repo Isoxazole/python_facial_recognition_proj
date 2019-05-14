@@ -2,7 +2,7 @@
 import face_recognition as fr
 
 
-def face_rec():
+def face_rec(picture_path=""):
 	# Load variables
 	known_face_load = False
 	count = 0
@@ -18,10 +18,15 @@ def face_rec():
 	# Create file where recognized faces will go
 	known_face_file = open("Recognized_Faces_Location.txt", "w+")
 
+	# make this not a local variable when used in the later nested for loops (make sure it's in a bigger scope)
+	known_face_enc = ""
+
 	# Get full path to user known image
-	
 	while not (known_face_load):
-		known_face_loc = raw_input("Please enter the full path of the known face to be found:\n")
+		if picture_path == "":
+			known_face_loc = raw_input("Please enter the full path of the known face to be found:\n")
+		else:
+			known_face_loc = picture_path
 		# Load known face to test off of. Working from lfw dataset.
 		try:
 			known_face = fr.load_image_file(known_face_loc)

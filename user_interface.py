@@ -12,33 +12,42 @@ Label(form, text="Check Directory").grid(row=0)
 entry1 = Entry(form)
 entry1.grid(row=0, column=1)
 
+
 def browse_button(entry):
     filename = filedialog.askdirectory()
     entry.insert(0, filename)
 
+
 def browse_file(entry):
     filename = filedialog.askopenfilename()
     entry.insert(0, filename)
+
+
 def submit():
-    if not os.path.exists(entry1.get()) or not os.path.isdir(entry1.get()):
-        messagebox.showerror("Error", f"{entry1.get()} is not a valid directory path.\n"
-        f" Please enter a valid path for your search directory of choice")
+    if entry1.get() == "":
+        default_path = os.path.abspath(os.sep)
+        messagebox.showinfo("Default Directory Used", "We noticed you didn't enter anything for your search "
+                                                      "directory, so it will now be set to \"%s\"" % default_path)
+        entry1.insert(0, default_path)
+    elif not os.path.exists(entry1.get()) or not os.path.isdir(entry1.get()):
+        messagebox.showerror("Error", "'%s' is not a valid directory path.\n"
+                                      " Please enter a valid path for your search directory of choice" % entry1.get())
     if not os.path.exists(entry2.get()) or not entry2.get().upper().endswith(tuple(i for i in walkDirs.imageFiles)):
-        messagebox.showerror("Error", f"{entry2.get()} is not a valid picture path.\n"
-        f" Please enter a valid path for your picture of choice")
+        messagebox.showerror("Error", "'%s' is not a valid picture path.\n"
+                                      " Please enter a valid path for your picture of choice" % entry2.get())
     directory_path = os.path.abspath(entry1.get())
     picture_path = os.path.abspath(entry2.get())
 
+    #Run directory walk with path inputted
     walkDirs.walk_dirs(directory_path)
 
-    known_face_file, count = faceRec.face_rec()
+    known_face_file, count = faceRec.face_rec(picture_path)
 
-    messagebox.showinfo("FaceFind Search Completed", f"There were {count} recognized faces\n"
-                        f"The full path of the images with the recognized face is here: \n {known_face_file}")
+    messagebox.showinfo("FaceFind Search Completed", f"There were %s recognized faces\n"
+                       "The full path of the images with the recognized face is here:\n %s" % (count, known_face_file))
 
-
-    print(directory_path)
-    print(picture_path)
+    # print(directory_path)
+    # print(picture_path)
 
 
 # browse directory button for search directory
@@ -58,11 +67,13 @@ browse_directory.grid(row=1, column=2)
 search_button = Button(form, text="Search", command=submit)
 search_button.grid(row=2, column=0)
 
-
 # show picture match paths here
-show_matches = Label(form, bg="gray", height=10, width=50,
-                     text="Matches will Display here").grid(row=3, columnspan=4)
+scroll_bar = Scrollbar(form, orient='vertical')
+show_matches = Text(form, bg="gray", height=10, width=50, yscrollcommand=scroll_bar.set,
+                    state='disabled')
+show_matches.grid(row=3, columnspan=4)
 
-Scrollbar(show_matches)
 
+
+scroll_bar.config(command=show_matches.yview)
 form.mainloop()
