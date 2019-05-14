@@ -27,4 +27,4 @@ walkDirs.walk_dirs(startDir)
 known_face_file, count = faceRec.face_rec()
 
 print("There were %s recognized faces" % count)
-print("The full path of the images with the recognized face is here: \n %s" % known_face_file)
+print("The full path of the images with the recognized face is here: \n Recognized_Faces_Location.txt")
