@@ -1,11 +1,12 @@
 import os
 import sys
 
+# Create a list of acceptable image formats.
+imageFiles = ['.JPG', '.JPEG', '.TIF', '.PNG', '.RAW']
+
 def walk_dirs(startDir):  
     print("Starting directory: " + startDir)
 
-    # Create a list of acceptable image formats.
-    imageFiles = ['.JPG', '.JPEG', '.TIF', '.PNG', '.RAW']
 
     # Create file to list all paths to images.
     f = open("img_paths.txt", "w+")

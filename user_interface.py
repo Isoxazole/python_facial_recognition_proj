@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter import messagebox
+import os
+import walkDirs
 
 form = Tk(className="FaceFind", useTk=1)
 form.geometry("500x500")
@@ -16,6 +19,17 @@ def browse_button(entry):
 def browse_file(entry):
     filename = filedialog.askopenfilename()
     entry.insert(0, filename)
+def submit():
+    if not os.path.exists(entry1.get()) or not os.path.isdir(entry1.get()):
+        messagebox.showerror("Error", f"{entry1.get()} is not a valid directory path.\n"
+        f" Please enter a valid path for your search directory of choice")
+    if not os.path.exists(entry2.get()) or not entry2.get().upper().endswith(tuple(i for i in walkDirs.imageFiles)):
+        messagebox.showerror("Error", f"{entry2.get()} is not a valid picture path.\n"
+        f" Please enter a valid path for your picture of choice")
+    directory_path = os.path.abspath(entry1.get())
+    picture_path = os.path.abspath(entry2.get())
+    print(directory_path)
+    print(picture_path)
 
 
 # browse directory button for search directory
@@ -32,7 +46,7 @@ browse_directory = Button(text="Browse", command=(lambda: browse_file(entry2)))
 browse_directory.grid(row=1, column=2)
 
 # this should check that the picture is actually a picture by the extension
-search_button = Button(form, text="Search")
+search_button = Button(form, text="Search", command=submit)
 search_button.grid(row=2, column=0)
 
 
