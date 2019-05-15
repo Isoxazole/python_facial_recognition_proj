@@ -1,6 +1,6 @@
-from tkinter import *
-from tkinter import filedialog
-from tkinter import messagebox
+from Tkinter import *
+import tkFileDialog
+import tkMessageBox
 import os
 import walkDirs
 
@@ -15,12 +15,12 @@ entry1.grid(row=0, column=1)
 
 
 def browse_button(entry):
-    filename = filedialog.askdirectory()
+    filename = tkFileDialog.askdirectory()
     entry.insert(0, filename)
 
 
 def browse_file(entry):
-    filename = filedialog.askopenfilename()
+    filename = tkFileDialog.askopenfilename()
     entry.insert(0, filename)
 
 
@@ -37,15 +37,15 @@ def submit():
     good_to_start = True
     if entry1.get() == "":
         default_path = os.path.abspath(os.sep)
-        messagebox.showinfo("Default Directory Used", "We noticed you didn't enter anything for your search "
+        tkMessageBox.showinfo("Default Directory Used", "We noticed you didn't enter anything for your search "
                                                       "directory, so it will now be set to \"%s\"" % default_path)
         good_to_start = False
     elif not os.path.exists(entry1.get()) or not os.path.isdir(entry1.get()):
-        messagebox.showerror("Error", "'%s' is not a valid directory path.\n"
+        tkMessageBox.showerror("Error", "'%s' is not a valid directory path.\n"
                                       " Please enter a valid path for your search directory of choice" % entry1.get())
         good_to_start = False
     if not os.path.exists(entry2.get()) or not entry2.get().upper().endswith(tuple(i for i in walkDirs.imageFiles)):
-        messagebox.showerror("Error", "'%s' is not a valid picture path.\n"
+        tkMessageBox.showerror("Error", "'%s' is not a valid picture path.\n"
                                       " Please enter a valid path for your picture of choice" % entry2.get())
         good_to_start = False
     if good_to_start:
