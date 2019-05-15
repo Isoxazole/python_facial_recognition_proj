@@ -31,7 +31,7 @@ def face_rec(picture_path=""):
 			known_face_enc = fr.face_encodings(known_face)[0] 
 			known_face_load = True # Set variable confirm sucessful setting.
 			name = str(raw_input("Please enter the name of the person in the image: "))
-			known_face_file.write("Photos of " + name + "..")
+			known_face_file.write("Photos of " + name + "..\n")
 			print("Successful image loading! \nBeginning Search..")
 		except IOError:
 			print("stuffy stuff")
