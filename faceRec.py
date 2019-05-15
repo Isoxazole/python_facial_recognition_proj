@@ -30,6 +30,11 @@ def face_rec(picture_path=""):
 			known_face = fr.load_image_file(known_face_loc)
 			known_face_enc = fr.face_encodings(known_face)[0] 
 			known_face_load = True # Set variable confirm sucessful setting.
+			name = str(raw_input("Please enter the name of the person in the image: "))
+			known_face_file.write("Photos of " + name + "..")
+			print("Successful image loading! \nBeginning Search..")
+		except IOError:
+			print("stuffy stuff")
 		except:
 			print('There was an error loading the known face. \n Check the path and that the image has a face.\nTry again..')
 
@@ -37,16 +42,19 @@ def face_rec(picture_path=""):
 	# It needs to undergo a for loop for every known image we have.
 	# https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py
 	for file_loc in file_locs:
-		unk_img = fr.load_image_file(file_loc)
-		unk_img_enc = fr.face_encodings(unk_img)
-		for i in range(len(unk_img_enc)):
-			result = fr.compare_faces([known_face_enc], unk_img_enc[i]) 
-			# If there is a True result, no need to search image further.
-			if ([True] in result):
-				known_face_file.write(file_loc + "\n")
-				count += 1
-				print("MATCH: %s" % file_loc)
-				break
+		try:
+			unk_img = fr.load_image_file(file_loc)
+			unk_img_enc = fr.face_encodings(unk_img)
+			for i in range(len(unk_img_enc)):
+				result = fr.compare_faces([known_face_enc], unk_img_enc[i]) 
+				# If there is a True result, no need to search image further.
+				if ([True] in result):
+					known_face_file.write(file_loc + "\n")
+					count += 1
+					print("MATCH: %s" % file_loc)
+					break
+		except:
+			print("Error with: %s \nContinuing..." % file_loc)
 	# Finished searching, close file.
 	known_face_file.close()
 	return known_face_file, count
